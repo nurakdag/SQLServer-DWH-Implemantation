@@ -5,10 +5,10 @@ A layered Data Warehouse built with **SQL Server** following the **Medallion Arc
 ## Architecture
 
 | Layer  | Purpose |
-|-------- ---------|
-| Bronze : Raw data ingestion from CRM & ERP CSV sources via BULK INSERT 
-| Silver : Data cleansing, deduplication, normalization and transformation 
-| Gold   : Star Schema views (dim_customers, dim_products, fact_sales) for analytics 
+|--------|---------|
+| Bronze | Raw data ingestion from CRM & ERP CSV sources via BULK INSERT |
+| Silver | Data cleansing, deduplication, normalization and transformation |
+| Gold   | Star Schema views (dim_customers, dim_products, fact_sales) for analytics |
 
 ## Tech Stack
 - SQL Server / T-SQL
