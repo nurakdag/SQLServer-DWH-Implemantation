@@ -21,10 +21,13 @@ A layered Data Warehouse built with **SQL Server** following the **Medallion Arc
 
 - ## 📊 Dashboard Screenshots
 ### Executive Summary
+image/sales-executive.png
 ### Product Analysis
+image/product-perfotmance.png
 ### Customer Insights
+image/customer-insight.png
 ### Sales Trends & Performance
-
+image/sales-trends.png
 
 ## How to Run
 1. Run `init_database.sql` to create the database and schemas
