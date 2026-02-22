@@ -19,6 +19,13 @@ A layered Data Warehouse built with **SQL Server** following the **Medallion Arc
 - **CRM:** Customer info, product info, sales details
 - **ERP:** Customer demographics, location, product categories
 
+- ## 📊 Dashboard Screenshots
+### Executive Summary
+### Product Analysis
+### Customer Insights
+### Sales Trends & Performance
+
+
 ## How to Run
 1. Run `init_database.sql` to create the database and schemas
 2. Run `bronze_layer/bronze_layer_table_creation.sql` to create bronze tables
