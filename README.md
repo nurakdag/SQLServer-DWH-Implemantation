@@ -6,8 +6,11 @@ Raw CRM and ERP data is ingested, cleansed, and exposed as a Star Schema for ana
 ---
 
 ## Architecture
-![Architecture](image/diagram.drawio(1).png)
+
+![Architecture](image/diagram.png)
+
 ## Tech Stack
+
 - **SQL Server** / T-SQL
 - **Stored Procedures** (bronze.load_bronze, silver.load_silver)
 - **Star Schema** — Dimensional Modeling
@@ -17,31 +20,32 @@ Raw CRM and ERP data is ingested, cleansed, and exposed as a Star Schema for ana
 
 ## Data Sources
 
-| Source | File | Description |
-|--------|------|-------------|
-| CRM | cust_info.csv | Customer master data |
-| CRM | prd_info.csv | Product catalog |
-| CRM | sales_details.csv | Sales transactions |
-| ERP | CUST_AZ12.csv | Customer demographics |
-| ERP | LOC_A101.csv | Location / country mapping |
-| ERP | PX_CAT_G1V2.csv | Product categories |
+| Source | File              | Description                |
+| ------ | ----------------- | -------------------------- |
+| CRM    | cust_info.csv     | Customer master data       |
+| CRM    | prd_info.csv      | Product catalog            |
+| CRM    | sales_details.csv | Sales transactions         |
+| ERP    | CUST_AZ12.csv     | Customer demographics      |
+| ERP    | LOC_A101.csv      | Location / country mapping |
+| ERP    | PX_CAT_G1V2.csv   | Product categories         |
 
 ---
 
 ## Silver Layer Transformations
 
-| Table | Transformations Applied |
-|-------|------------------------|
-| crm_cust_info | Whitespace trim, marital status decode (S/M → Single/Married), gender decode, deduplication by latest record |
-| crm_prd_info | Category ID extraction from product key, product line decode (M/R/S/T), date cast, end date calculation via LEAD() |
-| crm_sales_details | 8-digit integer → DATE conversion, sales = qty × price validation & correction |
-| erp_cust_az12 | NAS prefix removal, future birthdate nullification, gender normalization |
-| erp_loc_a101 | Hyphen removal from customer IDs, country code → full name (DE→Germany, US→United States) |
-| erp_px_cat_g1v2 | Direct pass-through with audit column |
+| Table             | Transformations Applied                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------ |
+| crm_cust_info     | Whitespace trim, marital status decode (S/M → Single/Married), gender decode, deduplication by latest record       |
+| crm_prd_info      | Category ID extraction from product key, product line decode (M/R/S/T), date cast, end date calculation via LEAD() |
+| crm_sales_details | 8-digit integer → DATE conversion, sales = qty × price validation & correction                                     |
+| erp_cust_az12     | NAS prefix removal, future birthdate nullification, gender normalization                                           |
+| erp_loc_a101      | Hyphen removal from customer IDs, country code → full name (DE→Germany, US→United States)                          |
+| erp_px_cat_g1v2   | Direct pass-through with audit column                                                                              |
 
 ---
 
 ## Gold Layer — Star Schema
+
 ```
                     ┌────────────────┐
                     │ dim_customers  │
@@ -68,6 +72,7 @@ Raw CRM and ERP data is ingested, cleansed, and exposed as a Star Schema for ana
 ---
 
 ## Project Structure
+
 ```
 SQLServer-DWH-Implementation/
 ├── datas/
@@ -93,11 +98,13 @@ SQLServer-DWH-Implementation/
 ## How to Run
 
 ### Prerequisites
+
 - SQL Server 2019+ (or SQL Server 2022)
 - Sufficient permissions to create databases, schemas, tables, and stored procedures
 - CSV source files placed in: `C:\sql\dwh_project\datasets\` (adjust path in `load_bronze_stored_procedure.sql` if needed)
 
 ### Execution Order
+
 ```sql
 -- Step 1: Initialize database and schemas
 -- Run: sql-server/scripts/bronze_layer/init_database.sql
@@ -126,13 +133,17 @@ SELECT * FROM gold.dim_products;
 ## Dashboard Screenshots
 
 ### Executive Summary
+
 ![Executive Summary](image/sales-executive.png)
 
 ### Product Analysis
+
 ![Product Analysis](image/product-perfotmance.png)
 
 ### Customer Insights
+
 ![Customer Insights](image/customer-insight.png)
 
 ### Sales Trends & Performance
+
 ![Sales Trends](image/sales-trends.png)
