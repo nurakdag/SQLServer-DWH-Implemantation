@@ -93,44 +93,7 @@ SQLServer-DWH-Implementation/
 └── dashboard-visualization.pbix
 ```
 
----
-
-## How to Run
-
-### Prerequisites
-
-- SQL Server 2019+ (or SQL Server 2022)
-- Sufficient permissions to create databases, schemas, tables, and stored procedures
-- CSV source files placed in: `C:\sql\dwh_project\datasets\` (adjust path in `load_bronze_stored_procedure.sql` if needed)
-
-### Execution Order
-
-```sql
--- Step 1: Initialize database and schemas
--- Run: sql-server/scripts/bronze_layer/init_database.sql
-
--- Step 2: Create Bronze tables
--- Run: sql-server/scripts/bronze_layer/bronze_layer_table_creation.sql
-
--- Step 3: Create Silver tables
--- Run: sql-server/scripts/silver_layer/ddl_silver.sql
-
--- Step 4: Create Gold views (Star Schema)
--- Run: sql-server/scripts/gold_layer/ddl_gold.sql
-
--- Step 5: Load data
-EXEC bronze.load_bronze;
-EXEC silver.load_silver;
-
--- Step 6: Query the Star Schema
-SELECT * FROM gold.fact_sales;
-SELECT * FROM gold.dim_customers;
-SELECT * FROM gold.dim_products;
-```
-
----
-
-## Dashboard Screenshots
+# Dashboard Screenshots
 
 ### Executive Summary
 
