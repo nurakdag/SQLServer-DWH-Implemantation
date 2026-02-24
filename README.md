@@ -6,7 +6,7 @@ Raw CRM and ERP data is ingested, cleansed, and exposed as a Star Schema for ana
 ---
 
 ## Architecture
-![Architecture](diayram.drawio.png)
+![Architecture](diagram.drawio.png)
 ## Tech Stack
 - **SQL Server** / T-SQL
 - **Stored Procedures** (bronze.load_bronze, silver.load_silver)
